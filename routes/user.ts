@@ -1,3 +1,4 @@
+import { verifyToken } from './../middlewares/authentication';
 import { User } from './../models/user.model';
 import { Router, Request, Response } from "express";
 import bcrypt from 'bcrypt';
@@ -109,6 +110,15 @@ userRoutes.post('/update', verifyToken,  (req: any, res: Response) => {
         });
     });
 
+});
+
+userRoutes.get('/', [verifyToken], (req: any, res: Response) => {
+
+    const user = req.user;
+    res.json({
+        ok: true,
+        user
+    });
 });
 
 export default userRoutes;

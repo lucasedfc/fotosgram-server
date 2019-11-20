@@ -7,7 +7,7 @@ const postSchema = new Schema({
     message: {
         type: String
     },
-    img: [{
+    imgs: [{
         type: String
     }],
     coords: {
@@ -28,7 +28,7 @@ postSchema.pre<IPost>('save', function( next) {
 interface IPost extends Document {
     created: Date;
     message: string;
-    img: string;
+    imgs: string;
     coords: string;
     user: string;
 }

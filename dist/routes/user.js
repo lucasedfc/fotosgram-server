@@ -3,11 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+const authentication_1 = require("./../middlewares/authentication");
 const user_model_1 = require("./../models/user.model");
 const express_1 = require("express");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const token_1 = __importDefault(require("../classes/token"));
-const authentication_1 = require("../middlewares/authentication");
 const userRoutes = express_1.Router();
 //Login
 userRoutes.post('/login', (req, res) => {
@@ -93,6 +93,13 @@ userRoutes.post('/update', authentication_1.verifyToken, (req, res) => {
             ok: true,
             token: userToken
         });
+    });
+});
+userRoutes.get('/', [authentication_1.verifyToken], (req, res) => {
+    const user = req.user;
+    res.json({
+        ok: true,
+        user
     });
 });
 exports.default = userRoutes;
