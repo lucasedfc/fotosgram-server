@@ -3,7 +3,7 @@ import { User } from './../models/user.model';
 import { Router, Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import Token from '../classes/token';
-import { verifyToken } from '../middlewares/authentication';
+
 
 
 const userRoutes = Router();
